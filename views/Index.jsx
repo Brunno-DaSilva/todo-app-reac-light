@@ -98,7 +98,7 @@ class Index extends React.Component {
                   <form action="/todos" method="POST">
                     Add Todo <input type="text" name="todo" />
                     <br />
-                    Created on: <input type="date" name="createdOn" />
+                    Due Date: <input type="date" name="dueDate" required />
                     <br />
                     <input type="submit" name="" value="Create Todo" />
                   </form>
@@ -130,12 +130,12 @@ class Index extends React.Component {
                             <td className="todoItem">
                               <a href={`todos/${index}`}>{data.todo}</a>
                             </td>
-                            <td>{data.createdOn.toISOString()}</td>
+                            <td>{data.dueDate.toDateString()}</td>
                             <td>
                               <form
-                                className="table__form-delete"
                                 action={`/todos/${data._id}?_method=DELETE`}
                                 method="POST"
+                                className="table__form-delete"
                               >
                                 <button
                                   className="table__btn-delete"

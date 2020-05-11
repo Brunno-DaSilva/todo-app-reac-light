@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Todo = require("./models/todos");
 const PORT = process.env.PORT || 5000;
+const methodOverride = require("method-override");
 
 //=============================
 //          Data
@@ -27,7 +28,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // //method override
-// app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));
 
 // =============================
 //      Mongoose Connection
@@ -81,12 +82,19 @@ app.get("/todos", (req, res) => {
 // app.get("/todos/new", (req, res) => {
 //   res.render("New");
 // });
-// //====================
-// //       Show
-// //====================
-// app.get("/budgets/:id", (req, res) => {
-//   res.render("Show.jsx", { Budget: Budget[req.params.id] });
-// });
+
+//====================
+//       Show
+//====================
+app.get("/budgets/:id", (req, res) => {
+  // Find the specific document
+  Todo.findById(req.params.id, (error, foundTodo) => {
+    // render the Show route and pass it the foundTodo
+    res.render("Show", {
+      todo: foundTodo,
+    });
+  });
+});
 
 /*************************************************************************
  * Functional Routes
@@ -108,9 +116,9 @@ app.post("/todos", (req, res) => {
 //====================
 //      Delete
 //====================
-app.delete("/:id", (req, res) => {
+app.delete("/todos/:id", (req, res) => {
   // Delete document from collection
-  Todo.findByIdAndRemove(req.params.id, (err, todos) => {
+  Todo.findByIdAndRemove(req.params.id, (err, Todos) => {
     res.redirect("/todos");
   });
 });

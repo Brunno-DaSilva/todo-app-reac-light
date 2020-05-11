@@ -366,6 +366,14 @@ table th {
   text-decoration: none;
   color: var(--dark-gray-color);
 }
+.table__form-delete {
+  width: 2vw;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .table__btn-delete {
   border: none;
   background-color: transparent;

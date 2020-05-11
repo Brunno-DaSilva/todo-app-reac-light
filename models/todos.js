@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 //=============================
 const todoSchema = new mongoose.Schema({
   todo: { type: String, required: true },
-  createdOn: { type: Date, default: Date.now },
+  dueDate: { type: Date, default: Date.now },
 });
 
 //=============================
